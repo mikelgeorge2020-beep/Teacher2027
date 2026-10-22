@@ -6,7 +6,7 @@
   <title>منصة المجتهد التعليمية | معًا نحو مستقبل أفضل</title>
   
   <!-- FontAwesome Icons & Google Fonts -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Firebase SDKs -->
@@ -50,7 +50,7 @@
     .auth-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
     .auth-card { background: white; border-radius: 16px; padding: 2rem; text-align: center; box-shadow: var(--shadow-sm); transition: all 0.3s; cursor: pointer; }
     .auth-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-    .auth-card i { font-size: 3rem; color: var(--primary); margin-bottom: 1rem; }
+    .auth-card i { font-size: 3rem; color: var(--primary); margin-bottom: 1rem; display: block; }
 
     .form-group { margin-bottom: 1.2rem; text-align: right; }
     .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 700; font-size: 0.9rem; }
@@ -85,7 +85,7 @@
 
     .files-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
     .file-card { background: white; border-radius: 14px; padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid #e2e8f0; text-align: center; }
-    .file-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 0.8rem; }
+    .file-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 0.8rem; display: block; }
 
     .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: all 0.3s; }
     .modal-overlay.active { opacity: 1; pointer-events: all; }
@@ -120,7 +120,7 @@
       <div style="text-align: center; margin-bottom: 2rem;">
         <div class="brand-logo-icon" style="width: 90px; height: 90px; font-size: 3rem; margin: 0 auto 1rem;">🎓</div>
         <h2 style="font-size: 2rem; color: var(--primary-dark); font-weight: 800;">مرحبًا بكم في منصة المجتهد التعليمية</h2>
-        <p style="color: var(--text-muted); font-size: 1.05rem;">البوابة الذكية التفاعلية المربوطة بسحابة مشروعك (manasa2026)</p>
+        <p style="color: var(--text-muted); font-size: 1.05rem;">البوابة الذكية التفاعلية المربوطة بالسحابة بين المدرس والطالب وولي الأمر</p>
       </div>
 
       <div class="auth-grid">
@@ -128,21 +128,21 @@
           <i class="fa-solid fa-user-gear"></i>
           <h3>تسجيل دخول الأدمن</h3>
           <p>اعتماد المدرسين، الجداول، والماليات</p>
-          <button class="btn btn-primary" style="width: 100%;">دخول اللوحة</button>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;"><i class="fa-solid fa-arrow-left"></i> دخول اللوحة</button>
         </div>
 
         <div class="auth-card" onclick="openLoginModal('teacher')">
-          <i class="fa-solid fa-chalkboard-teacher"></i>
+          <i class="fa-solid fa-chalkboard-user"></i>
           <h3>بوابة المدرس</h3>
           <p>تسجيل حساب، إدارة المجموعات، والملفات</p>
-          <button class="btn btn-primary" style="width: 100%;">دخول / تسجيل مدرس</button>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;"><i class="fa-solid fa-arrow-left"></i> دخول / تسجيل مدرس</button>
         </div>
 
         <div class="auth-card" onclick="openLoginModal('parent')">
-          <i class="fa-solid fa-child-reaching"></i>
+          <i class="fa-solid fa-user-graduate"></i>
           <h3>ولي الأمر والطلبة</h3>
           <p>متابعة الدروس بكود الطالب الخاص</p>
-          <button class="btn btn-primary" style="width: 100%;">دخول كود الطالب</button>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;"><i class="fa-solid fa-arrow-left"></i> دخول كود الطالب</button>
         </div>
       </div>
     </section>
@@ -154,13 +154,13 @@
           <h2><i class="fa-solid fa-user-shield" style="color: var(--primary);"></i> لوحة تحكم الأدمن (سحابية)</h2>
           <p style="color: var(--text-muted);">تحديث فوري لبيانات المنصة عبر جميع الأجهزة</p>
         </div>
-        <button class="btn btn-danger" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> خروج</button>
+        <button class="btn btn-danger" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> خروج</button>
       </div>
 
       <div class="stats-grid">
-        <div class="stat-box"><div class="stat-info"><h4>إجمالي المدرسين</h4><span id="stat-teachers-count">0</span></div></div>
-        <div class="stat-box"><div class="stat-info"><h4>طلبات قيد الموافقة</h4><span id="stat-pending-count">0</span></div></div>
-        <div class="stat-box"><div class="stat-info"><h4>إجمالي الطلاب</h4><span id="stat-students-count">0</span></div></div>
+        <div class="stat-box"><i class="fa-solid fa-chalkboard-user" style="font-size: 2rem; color: var(--primary);"></i><div class="stat-info"><h4>إجمالي المدرسين</h4><span id="stat-teachers-count">0</span></div></div>
+        <div class="stat-box"><i class="fa-solid fa-bell" style="font-size: 2rem; color: var(--warning);"></i><div class="stat-info"><h4>طلبات قيد الموافقة</h4><span id="stat-pending-count">0</span></div></div>
+        <div class="stat-box"><i class="fa-solid fa-users" style="font-size: 2rem; color: var(--secondary);"></i><div class="stat-info"><h4>إجمالي الطلاب</h4><span id="stat-students-count">0</span></div></div>
       </div>
 
       <div class="tabs-nav">
@@ -194,7 +194,7 @@
           <h2><i class="fa-solid fa-chalkboard-user" style="color: var(--primary);"></i> مرحبًا <span id="teacher-profile-name">الأستاذ</span></h2>
           <p style="color: var(--text-muted);" id="teacher-profile-details">التخصص - المحافظة</p>
         </div>
-        <button class="btn btn-danger" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> خروج</button>
+        <button class="btn btn-danger" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> خروج</button>
       </div>
 
       <div class="tabs-nav">
@@ -246,11 +246,11 @@
           <h2><i class="fa-solid fa-graduation-cap" style="color: var(--primary);"></i> مرحبًا <span id="student-portal-name">الطالب</span></h2>
           <p style="color: var(--text-muted);">المدرس الخاص بك: <strong id="student-portal-teacher" style="color: var(--primary-dark);">--</strong></p>
         </div>
-        <button class="btn btn-danger" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> خروج</button>
+        <button class="btn btn-danger" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> خروج</button>
       </div>
 
       <div id="parent-materials-tab" class="tab-content active">
-        <h4 style="margin-bottom: 1rem;">الشروحات والملفات المتاحة من المعلم:</h4>
+        <h4 style="margin-bottom: 1rem;"><i class="fa-solid fa-book-open"></i> الشروحات والملفات المتاحة من المعلم:</h4>
         <div class="files-grid" id="parent-files-grid"></div>
       </div>
     </section>
@@ -309,19 +309,4 @@
             <label>كود الطالب الخاص</label>
             <input type="text" id="parent-student-code" class="form-control" placeholder="STU-1001" required style="text-align: center; font-weight: 800; font-size: 1.2rem;">
           </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%;">استعراض الدروس أونلاين</button>
-        </form>
-      </div>
-
-      <button onclick="closeModal()" class="btn btn-danger" style="width: 100%; margin-top: 1rem;">إغلاق</button>
-    </div>
-  </div>
-
-  <footer><p>منصة المجتهد التعليمية السحابية &copy; 2026 - جميع الحقوق محفوظة</p></footer>
-
-  <script>
-    // إعدادات Firebase الحقيقية الخاصة بمشروعك (manasa2026)
-    const firebaseConfig = {
-      apiKey: "AIzaSyDIigMruwB9agz8mRK6e2sa53n9VpCJcdw",
-      authDomain: "manasa2026.firebaseapp.com",
- 
+          <button type="submit" class="btn btn-primary" style="width: 100%;">استعراض الد
