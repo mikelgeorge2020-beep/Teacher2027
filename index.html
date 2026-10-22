@@ -7,7 +7,7 @@
   
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Firebase SDKs -->
+  <!-- Firebase SDKs v8 -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -20,7 +20,7 @@
       --danger: #ef4444;
       --dark: #0f172a;
       --light-bg: #f0f9ff;
-      --glass-bg: rgba(255, 255, 255, 0.92);
+      --glass-bg: rgba(255, 255, 255, 0.95);
       --glass-border: rgba(255, 255, 255, 0.6);
       --text-main: #1e293b;
       --text-muted: #64748b;
@@ -46,7 +46,7 @@
     .glass-card { background: var(--glass-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; box-shadow: var(--shadow-lg); margin-bottom: 2rem; }
 
     .auth-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-    .auth-card { background: white; border-radius: 16px; padding: 2rem; text-align: center; box-shadow: var(--shadow-sm); transition: all 0.3s; cursor: pointer; }
+    .auth-card { background: white; border-radius: 16px; padding: 2rem; text-align: center; box-shadow: var(--shadow-sm); transition: all 0.3s; cursor: pointer; border: 2px solid transparent; }
     .auth-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: var(--shadow-lg); }
     .auth-card .card-emoji { font-size: 3rem; margin-bottom: 1rem; display: block; }
 
@@ -60,6 +60,7 @@
     .btn-success { background: var(--secondary); color: white; }
     .btn-danger { background: var(--danger); color: white; }
     .btn-warning { background: var(--warning); color: white; }
+    .btn:hover { opacity: 0.9; transform: scale(1.02); }
 
     .dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid #e2e8f0; }
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; margin-bottom: 2rem; }
@@ -86,8 +87,8 @@
     .file-card .file-emoji { font-size: 2.5rem; margin-bottom: 0.8rem; display: block; }
 
     .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: all 0.3s; }
-    .modal-overlay.active { opacity: 1; pointer-events: all; }
-    .modal-box { background: white; width: 90%; max-width: 550px; border-radius: 16px; padding: 2rem; max-height: 90vh; overflow-y: auto; }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-box { background: white; width: 90%; max-width: 550px; border-radius: 16px; padding: 2rem; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); }
 
     footer { text-align: center; padding: 1.5rem; background: white; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid #e2e8f0; margin-top: auto; }
   </style>
@@ -348,7 +349,4 @@
           teachers: data.teachers || {},
           pendingTeachers: data.pendingTeachers || {},
           students: data.students || {},
-          materials: data.materials || {}
-        };
-        if (currentUser && currentUser.role === 'admin') renderAdminDashboard();
-     
+          materia
