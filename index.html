@@ -32,3 +32,299 @@
     body { background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #f0f9ff 100%); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
 
     #conn-banner { display: none; background: #fef3c7; color: #92400e; padding: 0.6rem 1rem; text-align: center; font-weight: 700; font-size: 0.9rem; }
+
+    header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--glass-border); padding: 0.8rem 2rem; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); }
+    .header-container { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .brand-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer; }
+    .brand-logo-icon { width: 50px; height: 50px; background: linear-gradient(135deg, #0284c7, #10b981); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 800; border: 2px solid white; box-shadow: 0 4px 10px rgba(2,132,199,0.3); }
+    .brand-text h1 { font-size: 1.4rem; font-weight: 800; color: var(--primary-dark); line-height: 1.2; }
+    .brand-text p { font-size: 0.8rem; color: var(--secondary); font-weight: 700; }
+
+    .role-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+    .role-btn { padding: 8px 16px; border-radius: 30px; border: 1.5px solid transparent; background: rgba(2, 132, 199, 0.08); color: var(--primary-dark); font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+    .role-btn:hover, .role-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); }
+
+    main { flex: 1; max-width: 1300px; width: 100%; margin: 2rem auto; padding: 0 1.5rem; }
+    .glass-card { background: var(--glass-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; box-shadow: var(--shadow-lg); margin-bottom: 2rem; }
+
+    .auth-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+    .auth-card { background: white; border-radius: 16px; padding: 2rem; text-align: center; box-shadow: var(--shadow-sm); transition: all 0.3s; cursor: pointer; border: 2px solid transparent; }
+    .auth-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+    .auth-card .card-emoji { font-size: 3rem; margin-bottom: 1rem; display: block; }
+
+    .form-group { margin-bottom: 1.2rem; text-align: right; }
+    .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 700; font-size: 0.9rem; }
+    .form-control { width: 100%; padding: 0.75rem 1rem; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 0.95rem; outline: none; background: #f8fafc; }
+    .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+
+    .btn { padding: 0.75rem 1.5rem; border-radius: 10px; border: none; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-success { background: var(--secondary); color: white; }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-warning { background: var(--warning); color: white; }
+    .btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+    .dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid #e2e8f0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; margin-bottom: 2rem; }
+    .stat-box { background: white; padding: 1.2rem; border-radius: 14px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 1rem; }
+    .stat-info h4 { font-size: 0.85rem; color: var(--text-muted); }
+    .stat-info span { font-size: 1.4rem; font-weight: 800; }
+
+    .invite-box { background: white; border: 2px dashed var(--primary); border-radius: 14px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; }
+    .invite-box h4 { margin-bottom: 0.6rem; }
+    .invite-row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .invite-row input { flex: 1; min-width: 220px; direction: ltr; text-align: left; }
+
+    .tabs-nav { display: flex; gap: 10px; border-bottom: 2px solid #e2e8f0; margin-bottom: 1.5rem; overflow-x: auto; }
+    .tab-item { padding: 0.8rem 1.2rem; font-weight: 700; color: var(--text-muted); cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; }
+    .tab-item.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .table-responsive { overflow-x: auto; background: white; border-radius: 12px; box-shadow: var(--shadow-sm); }
+    table { width: 100%; border-collapse: collapse; text-align: right; }
+    th, td { padding: 1rem; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; }
+    th { background: #f8fafc; color: var(--text-muted); font-weight: 700; }
+
+    .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+    .badge-active { background: #d1fae5; color: #065f46; }
+
+    .files-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
+    .file-card { background: white; border-radius: 14px; padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid #e2e8f0; text-align: center; }
+    .file-card .file-emoji { font-size: 2.5rem; margin-bottom: 0.8rem; display: block; }
+
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: all 0.3s; }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-box { background: white; width: 90%; max-width: 550px; border-radius: 16px; padding: 2rem; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); }
+
+    footer { text-align: center; padding: 1.5rem; background: white; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid #e2e8f0; margin-top: auto; }
+  </style>
+</head>
+<body>
+
+  <div id="conn-banner"></div>
+
+  <header>
+    <div class="header-container">
+      <div class="brand-logo" onclick="switchView('landing')">
+        <div class="brand-logo-icon">🎓</div>
+        <div class="brand-text">
+          <h1>منصة المجتهد</h1>
+          <p>معًا نحو مستقبل أفضل</p>
+        </div>
+      </div>
+
+      <div class="role-badges">
+        <button class="role-btn" id="btn-role-admin" onclick="openLoginModal('admin')">🛡️ الأدمن</button>
+        <button class="role-btn" id="btn-role-teacher" onclick="openLoginModal('teacher')">👨‍🏫 المدرس</button>
+        <button class="role-btn" id="btn-role-parent" onclick="openLoginModal('parent')">👨‍🎓 ولي الأمر / الطالب</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- LANDING VIEW -->
+    <section id="view-landing" class="glass-card">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div class="brand-logo-icon" style="width: 90px; height: 90px; font-size: 3rem; margin: 0 auto 1rem;">🎓</div>
+        <h2 style="font-size: 2rem; color: var(--primary-dark); font-weight: 800;">مرحبًا بكم في منصة المجتهد التعليمية</h2>
+        <p style="color: var(--text-muted); font-size: 1.05rem;">البوابة الذكية التفاعلية المربوطة بالسحابة بين المدرس والطالب وولي الأمر</p>
+      </div>
+
+      <div class="auth-grid">
+        <div class="auth-card" onclick="openLoginModal('admin')">
+          <span class="card-emoji">⚙️</span>
+          <h3>تسجيل دخول الأدمن</h3>
+          <p>اعتماد المدرسين، الجداول، والماليات</p>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">دخول اللوحة ⬅️</button>
+        </div>
+
+        <div class="auth-card" onclick="openLoginModal('teacher')">
+          <span class="card-emoji">👨‍🏫</span>
+          <h3>بوابة المدرس</h3>
+          <p>تسجيل حساب، إدارة المجموعات، والملفات</p>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">دخول / تسجيل مدرس ⬅️</button>
+        </div>
+
+        <div class="auth-card" onclick="openLoginModal('parent')">
+          <span class="card-emoji">🎓</span>
+          <h3>ولي الأمر والطلبة</h3>
+          <p>متابعة الدروس بكود الطالب الخاص</p>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">دخول كود الطالب ⬅️</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMIN VIEW -->
+    <section id="view-admin" class="glass-card" style="display: none;">
+      <div class="dashboard-header">
+        <div>
+          <h2>🛡️ لوحة تحكم الأدمن (سحابية)</h2>
+          <p style="color: var(--text-muted);">تحديث فوري لبيانات المنصة عبر جميع الأجهزة</p>
+        </div>
+        <button class="btn btn-danger" onclick="logout()">🚪 خروج</button>
+      </div>
+
+      <div class="invite-box">
+        <h4>🔗 رابط تسجيل المدرسين (أرسله لهم):</h4>
+        <div class="invite-row">
+          <input type="text" id="invite-link" class="form-control" readonly>
+          <button class="btn btn-primary" onclick="copyInviteLink()">📋 نسخ الرابط</button>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.6rem;">المدرس يسجّل من الرابط، ولا يستطيع الدخول إلا بعد موافقتك من تبويب «الطلبات المعلقة».</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box"><span style="font-size: 2rem;">👨‍🏫</span><div class="stat-info"><h4>إجمالي المدرسين</h4><span id="stat-teachers-count">0</span></div></div>
+        <div class="stat-box"><span style="font-size: 2rem;">🔔</span><div class="stat-info"><h4>طلبات قيد الموافقة</h4><span id="stat-pending-count">0</span></div></div>
+        <div class="stat-box"><span style="font-size: 2rem;">👥</span><div class="stat-info"><h4>إجمالي الطلاب</h4><span id="stat-students-count">0</span></div></div>
+      </div>
+
+      <div class="tabs-nav">
+        <div class="tab-item active" onclick="switchTab('admin', 'teachers-tab', event)">👨‍🏫 دليل المعلمين</div>
+        <div class="tab-item" onclick="switchTab('admin', 'pending-tab', event)">🔔 الطلبات المعلقة</div>
+      </div>
+
+      <div id="admin-teachers-tab" class="tab-content active">
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>المدرس</th><th>الهاتف</th><th>المحافظة</th><th>المرحلة / المادة</th><th>الحالة</th></tr></thead>
+            <tbody id="admin-teachers-list"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="admin-pending-tab" class="tab-content">
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>تاريخ الطلب</th><th>الاسم</th><th>الهاتف</th><th>المحافظة</th><th>المرحلة / المادة</th><th>القرار</th></tr></thead>
+            <tbody id="admin-pending-list"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEACHER VIEW -->
+    <section id="view-teacher" class="glass-card" style="display: none;">
+      <div class="dashboard-header">
+        <div>
+          <h2>👨‍🏫 مرحبًا <span id="teacher-profile-name">الأستاذ</span></h2>
+          <p style="color: var(--text-muted);" id="teacher-profile-details">التخصص - المحافظة</p>
+        </div>
+        <button class="btn btn-danger" onclick="logout()">🚪 خروج</button>
+      </div>
+
+      <div class="tabs-nav">
+        <div class="tab-item active" onclick="switchTab('teacher', 'students-tab', event)">👥 الطلاب والأكواد</div>
+        <div class="tab-item" onclick="switchTab('teacher', 'files-tab', event)">📂 رفع الملفات والشروحات</div>
+      </div>
+
+      <div id="teacher-students-tab" class="tab-content active">
+        <div style="background: white; padding: 1.5rem; border-radius: 14px; margin-bottom: 1.5rem;">
+          <h4>➕ إضافة طالب وتوليد كود أونلاين:</h4>
+          <form onsubmit="handleAddStudent(event)" style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+            <input type="text" id="new-student-name" class="form-control" placeholder="اسم الطالب" required style="flex:2; min-width: 180px;">
+            <input type="tel" id="new-student-phone" class="form-control" placeholder="هاتف ولي الأمر" required style="flex:1; min-width: 140px;">
+            <input type="text" id="new-student-group" class="form-control" placeholder="المجموعة / الصف" required style="flex:1; min-width: 140px;">
+            <button type="submit" class="btn btn-primary">🔑 إضافة وإصدار كود</button>
+          </form>
+        </div>
+
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>كود الطالب</th><th>اسم الطالب</th><th>هاتف ولي الأمر</th><th>المجموعة</th><th>نسخ</th></tr></thead>
+            <tbody id="teacher-students-list"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="teacher-files-tab" class="tab-content">
+        <div style="background: white; padding: 1.5rem; border-radius: 14px; margin-bottom: 1.5rem;">
+          <h4>☁️ رفع درس أو فيديو أونلاين:</h4>
+          <form onsubmit="handleUploadContent(event)" style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+            <input type="text" id="upload-title" class="form-control" placeholder="عنوان الدرس" required style="flex:2; min-width: 180px;">
+            <select id="upload-type" class="form-control" style="flex:1; min-width: 130px;" required>
+              <option value="فيديو">فيديو شرح</option>
+              <option value="ملف PDF">ملف PDF / مذكرة</option>
+            </select>
+            <input type="url" id="upload-url" class="form-control" placeholder="رابط الملف/الفيديو" required style="flex:2; min-width: 180px;">
+            <button type="submit" class="btn btn-success">🚀 نشر سحابي</button>
+          </form>
+        </div>
+
+        <div class="files-grid" id="teacher-files-grid"></div>
+      </div>
+    </section>
+
+    <!-- PARENT VIEW -->
+    <section id="view-parent" class="glass-card" style="display: none;">
+      <div class="dashboard-header">
+        <div>
+          <h2>🎓 مرحبًا <span id="student-portal-name">الطالب</span></h2>
+          <p style="color: var(--text-muted);">المدرس الخاص بك: <strong id="student-portal-teacher" style="color: var(--primary-dark);">--</strong></p>
+        </div>
+        <button class="btn btn-danger" onclick="logout()">🚪 خروج</button>
+      </div>
+
+      <div id="parent-materials-tab" class="tab-content active">
+        <h4 style="margin-bottom: 1rem;">📚 الشروحات والملفات المتاحة من المعلم:</h4>
+        <div class="files-grid" id="parent-files-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODALS -->
+  <div class="modal-overlay" id="auth-modal">
+    <div class="modal-box">
+      <!-- Admin Login -->
+      <div id="form-login-admin" class="auth-subform" style="display: none;">
+        <h3 style="margin-bottom: 1rem; text-align: center;">🔐 دخول الأدمن</h3>
+        <form onsubmit="handleAdminLogin(event)">
+          <div class="form-group"><label>المستخدم</label><input type="text" id="admin-user" class="form-control" autocomplete="username" required></div>
+          <div class="form-group"><label>كلمة المرور</label><input type="password" id="admin-pass" class="form-control" autocomplete="current-password" required></div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">دخول</button>
+        </form>
+      </div>
+
+      <!-- Teacher Login -->
+      <div id="form-login-teacher" class="auth-subform" style="display: none;">
+        <h3 style="margin-bottom: 1rem; text-align: center;">👨‍🏫 دخول المعلم</h3>
+        <form onsubmit="handleTeacherLogin(event)">
+          <div class="form-group"><label>الهاتف أو البريد</label><input type="text" id="t-login-id" class="form-control" required></div>
+          <div class="form-group"><label>كلمة السر</label><input type="password" id="t-login-pass" class="form-control" required></div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">دخول</button>
+          <div style="text-align: center;">
+            <a href="#" onclick="switchAuthSubform('register-teacher'); return false;" style="color: var(--primary); font-weight: 700; text-decoration: none;">تسجيل حساب مدرس جديد</a>
+          </div>
+        </form>
+      </div>
+
+      <!-- Teacher Register -->
+      <div id="form-register-teacher" class="auth-subform" style="display: none;">
+        <h3 style="margin-bottom: 0.4rem; text-align: center;">➕ تسجيل مدرس جديد</h3>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">سيتم تفعيل حسابك بعد موافقة الأدمن.</p>
+        <form onsubmit="handleTeacherRegister(event)">
+          <div class="form-group"><label>الاسم الكامل</label><input type="text" id="reg-t-name" class="form-control" required></div>
+          <div class="form-row">
+            <div class="form-group"><label>الهاتف</label><input type="tel" id="reg-t-phone" class="form-control" required></div>
+            <div class="form-group"><label>البريد</label><input type="email" id="reg-t-email" class="form-control" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>المحافظة</label><input type="text" id="reg-t-gov" class="form-control" placeholder="القاهرة، الجيزة..." required></div>
+            <div class="form-group"><label>المرحلة والمادة</label><input type="text" id="reg-t-subject" class="form-control" placeholder="ثانوي - فيزياء..." required></div>
+          </div>
+          <div class="form-group"><label>كلمة السر (6 أحرف على الأقل)</label><input type="password" id="reg-t-pass" class="form-control" minlength="6" autocomplete="new-password" required></div>
+          <button type="submit" class="btn btn-success" style="width: 100%; margin-top: 0.5rem;">إرسال طلب التسجيل</button>
+          <button type="button" class="btn btn-warning" onclick="switchAuthSubform('login-teacher')" style="width: 100%; margin-top: 0.5rem;">عودة للدخول</button>
+        </form>
+      </div>
+
+      <!-- Parent Login -->
+      <div id="form-login-parent" class="auth-subform" style="display: none;">
+        <h3 style="margin-bottom: 1rem; text-align: center;">🔑 دخول ولي الأمر / الطالب</h3>
+        <form onsubmit="handleParentLogin(event)">
+          <div class="form-group">
+            <label>كود الطالب الخاص</label>
+            <input type="text" id="parent-student-code" class="form-control" placeholder="STU-1001" required style="text-align: center; font-weight: 800; font-size: 1.2rem;">
+          </div>
+          <button type="submit" class="btn btn-primary" style="w
