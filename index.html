@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Firebase SDKs for Realtime Cloud Database -->
+  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -81,7 +81,6 @@
     th { background: #f8fafc; color: var(--text-muted); font-weight: 700; }
 
     .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
-    .badge-pending { background: #fef3c7; color: #92400e; }
     .badge-active { background: #d1fae5; color: #065f46; }
 
     .files-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
@@ -121,7 +120,7 @@
       <div style="text-align: center; margin-bottom: 2rem;">
         <div class="brand-logo-icon" style="width: 90px; height: 90px; font-size: 3rem; margin: 0 auto 1rem;">🎓</div>
         <h2 style="font-size: 2rem; color: var(--primary-dark); font-weight: 800;">مرحبًا بكم في منصة المجتهد التعليمية</h2>
-        <p style="color: var(--text-muted); font-size: 1.05rem;">البوابة الذكية التفاعلية المربوطة بالسحابة بين المدرس والطالب وولي الأمر</p>
+        <p style="color: var(--text-muted); font-size: 1.05rem;">البوابة الذكية التفاعلية المربوطة بسحابة مشروعك (manasa2026)</p>
       </div>
 
       <div class="auth-grid">
@@ -321,277 +320,8 @@
   <footer><p>منصة المجتهد التعليمية السحابية &copy; 2026 - جميع الحقوق محفوظة</p></footer>
 
   <script>
-    // 1. إعدادات قاعدة البيانات السحابية (Firebase Realtime Cloud Database)
+    // إعدادات Firebase الحقيقية الخاصة بمشروعك (manasa2026)
     const firebaseConfig = {
-      databaseURL: "https://mansa2026-default-rtdb.firebaseio.com/"
-    };
-    
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
-    const dbRef = firebase.database().ref('ELMOGTAHED_CLOUD_DB');
-
-    // البيانات المحلية المؤقتة المربوطة بالسحابة
-    let cloudData = {
-      teachers: {},
-      pendingTeachers: {},
-      students: {},
-      materials: {}
-    };
-
-    // الاستماع والتحديث الفوري عند أي تسجيل جديد من أي جهاز عبر الإنترنت
-    dbRef.on('value', (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        cloudData = {
-          teachers: data.teachers || {},
-          pendingTeachers: data.pendingTeachers || {},
-          students: data.students || {},
-          materials: data.materials || {}
-        };
-        // تحديث الواجهات الحالية تلقائياً
-        if (currentUser && currentUser.role === 'admin') renderAdminDashboard();
-        if (currentUser && currentUser.role === 'teacher') renderTeacherDashboard();
-        if (currentUser && currentUser.role === 'parent') renderParentPortal();
-      }
-    });
-
-    let currentUser = null;
-
-    function openLoginModal(role) {
-      document.querySelectorAll('.auth-subform').forEach(f => f.style.display = 'none');
-      document.getElementById('auth-modal').classList.add('active');
-      if (role === 'admin') document.getElementById('form-login-admin').style.display = 'block';
-      else if (role === 'teacher') document.getElementById('form-login-teacher').style.display = 'block';
-      else if (role === 'parent') document.getElementById('form-login-parent').style.display = 'block';
-    }
-
-    function switchAuthSubform(subform) {
-      document.querySelectorAll('.auth-subform').forEach(f => f.style.display = 'none');
-      document.getElementById('form-' + subform).style.display = 'block';
-    }
-
-    function closeModal() { document.getElementById('auth-modal').classList.remove('active'); }
-
-    function switchView(viewName) {
-      document.querySelectorAll('main > section').forEach(sec => sec.style.display = 'none');
-      document.getElementById('view-' + viewName).style.display = 'block';
-      document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
-      if (viewName !== 'landing') {
-        const btn = document.getElementById('btn-role-' + viewName);
-        if (btn) btn.classList.add('active');
-      }
-    }
-
-    function switchTab(role, tabId, event) {
-      const container = document.getElementById('view-' + role);
-      container.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
-      container.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-      if (event && event.currentTarget) event.currentTarget.classList.add('active');
-      document.getElementById(role + '-' + tabId).classList.add('active');
-    }
-
-    // AUTH ACTIONS
-    function handleAdminLogin(e) {
-      e.preventDefault();
-      if (document.getElementById('admin-user').value === 'admin' && document.getElementById('admin-pass').value === '123456') {
-        currentUser = { role: 'admin', name: 'مدير المنصة' };
-        closeModal();
-        switchView('admin');
-        renderAdminDashboard();
-      } else alert('بيانات غبر صحيحة!');
-    }
-
-    function handleTeacherLogin(e) {
-      e.preventDefault();
-      const idInput = document.getElementById('t-login-id').value.trim();
-      const passInput = document.getElementById('t-login-pass').value.trim();
-
-      const teachersList = Object.values(cloudData.teachers);
-      const teacher = teachersList.find(t => (t.phone === idInput || t.email === idInput) && t.pass === passInput);
-
-      if (teacher) {
-        currentUser = { role: 'teacher', ...teacher };
-        closeModal();
-        switchView('teacher');
-        renderTeacherDashboard();
-        return;
-      }
-
-      const pendingList = Object.values(cloudData.pendingTeachers);
-      const pending = pendingList.find(t => (t.phone === idInput || t.email === idInput));
-      if (pending) {
-        alert('حسابك قيد المراجعة والاعتماد حالياً من قبل الأدمن على السحابة.');
-        return;
-      }
-      alert('الحساب غير موجود أو لم يتم اعتماده بعد.');
-    }
-
-    function handleTeacherRegister(e) {
-      e.preventDefault();
-      const id = 'TP-' + Date.now();
-      const newTeacher = {
-        id,
-        name: document.getElementById('reg-t-name').value,
-        phone: document.getElementById('reg-t-phone').value,
-        email: document.getElementById('reg-t-email').value,
-        gov: document.getElementById('reg-t-gov').value,
-        subject: document.getElementById('reg-t-subject').value,
-        pass: document.getElementById('reg-t-pass').value,
-        date: new Date().toISOString().split('T')[0]
-      };
-
-      dbRef.child('pendingTeachers').child(id).set(newTeacher);
-      alert('تم إرسال طلبك للسحابة بنجاح! سيظهر فوريًا لدى الأدمن من أي جهاز.');
-      closeModal();
-    }
-
-    function handleParentLogin(e) {
-      e.preventDefault();
-      const code = document.getElementById('parent-student-code').value.trim().toUpperCase();
-      const studentsList = Object.values(cloudData.students);
-      const student = studentsList.find(s => s.code.toUpperCase() === code);
-
-      if (student) {
-        const teacher = cloudData.teachers[student.teacherId] || null;
-        currentUser = { role: 'parent', student, teacher };
-        closeModal();
-        switchView('parent');
-        renderParentPortal();
-      } else alert('كود الطالب غير صحيح أو غير متصل بالسحابة!');
-    }
-
-    function logout() { currentUser = null; switchView('landing'); }
-
-    // RENDERING
-    function renderAdminDashboard() {
-      const teachersList = Object.values(cloudData.teachers);
-      const pendingList = Object.values(cloudData.pendingTeachers);
-      const studentsList = Object.values(cloudData.students);
-
-      document.getElementById('stat-teachers-count').textContent = teachersList.length;
-      document.getElementById('stat-pending-count').textContent = pendingList.length;
-      document.getElementById('stat-students-count').textContent = studentsList.length;
-
-      const tBody = document.getElementById('admin-teachers-list');
-      tBody.innerHTML = '';
-      teachersList.forEach(t => {
-        tBody.innerHTML += `<tr><td><strong>${t.name}</strong></td><td>${t.phone}</td><td>${t.gov}</td><td>المرحلة</td><td>${t.subject}</td><td><span class="badge badge-active">مفعل</span></td></tr>`;
-      });
-
-      const pBody = document.getElementById('admin-pending-list');
-      pBody.innerHTML = '';
-      if (pendingList.length === 0) pBody.innerHTML = '<tr><td colspan="6" style="text-align:center;">لا توجد طلبات معلقة حالياً</td></tr>';
-      pendingList.forEach(t => {
-        pBody.innerHTML += `
-          <tr>
-            <td>${t.date}</td><td><strong>${t.name}</strong></td><td>${t.phone}</td><td>${t.gov}</td><td>${t.subject}</td>
-            <td><button onclick="approveTeacher('${t.id}')" class="btn btn-success" style="padding:4px 8px; font-size:0.8rem;">موافقة وتفعيل</button></td>
-          </tr>
-        `;
-      });
-    }
-
-    function approveTeacher(id) {
-      const teacher = cloudData.pendingTeachers[id];
-      if (teacher) {
-        dbRef.child('teachers').child(id).set(teacher);
-        dbRef.child('pendingTeachers').child(id).remove();
-        alert(`تم قبول وتفعيل حساب الأستاذ (${teacher.name}) سحابياً.`);
-      }
-    }
-
-    function renderTeacherDashboard() {
-      if (!currentUser || currentUser.role !== 'teacher') return;
-      document.getElementById('teacher-profile-name').textContent = currentUser.name;
-      document.getElementById('teacher-profile-details').textContent = `${currentUser.subject} (${currentUser.gov})`;
-
-      // Render My Students
-      const tbody = document.getElementById('teacher-students-list');
-      tbody.innerHTML = '';
-      const myStudents = Object.values(cloudData.students).filter(s => s.teacherId === currentUser.id);
-      myStudents.forEach(s => {
-        tbody.innerHTML += `
-          <tr>
-            <td><strong style="color:var(--primary);">${s.code}</strong></td>
-            <td>${s.name}</td><td>${s.phone}</td><td>${s.group}</td>
-            <td><button onclick="navigator.clipboard.writeText('${s.code}'); alert('تم نسخ الكود!');" class="btn btn-primary" style="padding:4px 8px; font-size:0.8rem;">نسخ</button></td>
-          </tr>
-        `;
-      });
-
-      // Render My Files
-      const grid = document.getElementById('teacher-files-grid');
-      grid.innerHTML = '';
-      const myFiles = Object.values(cloudData.materials).filter(m => m.teacherId === currentUser.id);
-      myFiles.forEach(m => {
-        grid.innerHTML += `
-          <div class="file-card">
-            <i class="fa-solid ${m.type === 'فيديو' ? 'fa-circle-play' : 'fa-file-pdf'}"></i>
-            <h4>${m.title}</h4>
-            <a href="${m.url}" target="_blank" class="btn btn-primary" style="width:100%; margin-top:1rem;">معاينة</a>
-          </div>
-        `;
-      });
-    }
-
-    function handleAddStudent(e) {
-      e.preventDefault();
-      const code = 'STU-' + Math.floor(1000 + Math.random() * 9000);
-      const id = 'S-' + Date.now();
-      const newStu = {
-        id,
-        code,
-        name: document.getElementById('new-student-name').value,
-        phone: document.getElementById('new-student-phone').value,
-        group: document.getElementById('new-student-group').value,
-        teacherId: currentUser.id
-      };
-
-      dbRef.child('students').child(id).set(newStu);
-      e.target.reset();
-      alert(`تم إضافة الطالب وحفظه أونلاين!\nالكود الخاص بالطالب: [ ${code} ]`);
-    }
-
-    function handleUploadContent(e) {
-      e.preventDefault();
-      const id = 'M-' + Date.now();
-      const newMat = {
-        id,
-        teacherId: currentUser.id,
-        title: document.getElementById('upload-title').value,
-        type: document.getElementById('upload-type').value,
-        url: document.getElementById('upload-url').value
-      };
-
-      dbRef.child('materials').child(id).set(newMat);
-      e.target.reset();
-      alert('تم رفع الدرس أونلاين بنجاح!');
-    }
-
-    function renderParentPortal() {
-      if (!currentUser || currentUser.role !== 'parent') return;
-      const { student, teacher } = currentUser;
-      document.getElementById('student-portal-name').textContent = student.name;
-      document.getElementById('student-portal-teacher').textContent = teacher ? `${teacher.name} (${teacher.subject})` : 'غير محدد';
-
-      const grid = document.getElementById('parent-files-grid');
-      grid.innerHTML = '';
-      const files = Object.values(cloudData.materials).filter(m => m.teacherId === student.teacherId);
-      if (files.length === 0) grid.innerHTML = '<p style="color:var(--text-muted);">لا توجد ملفات سحابية لهذا المدرس بعد.</p>';
-      else {
-        files.forEach(m => {
-          grid.innerHTML += `
-            <div class="file-card">
-              <i class="fa-solid ${m.type === 'فيديو' ? 'fa-video' : 'fa-file-lines'}"></i>
-              <h4>${m.title}</h4>
-              <a href="${m.url}" target="_blank" class="btn btn-primary" style="width:100%; margin-top:1rem;">فتح الدرس</a>
-            </div>
-          `;
-        });
-      }
-    }
-  </script>
-</body>
-</html>
-
+      apiKey: "AIzaSyDIigMruwB9agz8mRK6e2sa53n9VpCJcdw",
+      authDomain: "manasa2026.firebaseapp.com",
+ 
