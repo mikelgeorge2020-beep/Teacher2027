@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>منصة المجتهد التعليمية | معًا نحو مستقبل أفضل</title>
   
-  <!-- FontAwesome Icons & Google Fonts -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Firebase SDKs -->
@@ -50,7 +48,7 @@
     .auth-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
     .auth-card { background: white; border-radius: 16px; padding: 2rem; text-align: center; box-shadow: var(--shadow-sm); transition: all 0.3s; cursor: pointer; }
     .auth-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-    .auth-card i { font-size: 3rem; color: var(--primary); margin-bottom: 1rem; display: block; }
+    .auth-card .card-emoji { font-size: 3rem; margin-bottom: 1rem; display: block; }
 
     .form-group { margin-bottom: 1.2rem; text-align: right; }
     .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 700; font-size: 0.9rem; }
@@ -85,7 +83,7 @@
 
     .files-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
     .file-card { background: white; border-radius: 14px; padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid #e2e8f0; text-align: center; }
-    .file-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 0.8rem; display: block; }
+    .file-card .file-emoji { font-size: 2.5rem; margin-bottom: 0.8rem; display: block; }
 
     .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: all 0.3s; }
     .modal-overlay.active { opacity: 1; pointer-events: all; }
@@ -107,9 +105,9 @@
       </div>
 
       <div class="role-badges">
-        <button class="role-btn" id="btn-role-admin" onclick="openLoginModal('admin')"><i class="fa-solid fa-user-shield"></i> الأدمن</button>
-        <button class="role-btn" id="btn-role-teacher" onclick="openLoginModal('teacher')"><i class="fa-solid fa-chalkboard-user"></i> المدرس</button>
-        <button class="role-btn" id="btn-role-parent" onclick="openLoginModal('parent')"><i class="fa-solid fa-user-graduate"></i> ولي الأمر / الطالب</button>
+        <button class="role-btn" id="btn-role-admin" onclick="openLoginModal('admin')">🛡️ الأدمن</button>
+        <button class="role-btn" id="btn-role-teacher" onclick="openLoginModal('teacher')">👨‍🏫 المدرس</button>
+        <button class="role-btn" id="btn-role-parent" onclick="openLoginModal('parent')">👨‍🎓 ولي الأمر / الطالب</button>
       </div>
     </div>
   </header>
@@ -125,24 +123,24 @@
 
       <div class="auth-grid">
         <div class="auth-card" onclick="openLoginModal('admin')">
-          <i class="fa-solid fa-user-gear"></i>
+          <span class="card-emoji">⚙️</span>
           <h3>تسجيل دخول الأدمن</h3>
           <p>اعتماد المدرسين، الجداول، والماليات</p>
-          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;"><i class="fa-solid fa-arrow-left"></i> دخول اللوحة</button>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">دخول اللوحة ⬅️</button>
         </div>
 
         <div class="auth-card" onclick="openLoginModal('teacher')">
-          <i class="fa-solid fa-chalkboard-user"></i>
+          <span class="card-emoji">👨‍🏫</span>
           <h3>بوابة المدرس</h3>
           <p>تسجيل حساب، إدارة المجموعات، والملفات</p>
-          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;"><i class="fa-solid fa-arrow-left"></i> دخول / تسجيل مدرس</button>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">دخول / تسجيل مدرس ⬅️</button>
         </div>
 
         <div class="auth-card" onclick="openLoginModal('parent')">
-          <i class="fa-solid fa-user-graduate"></i>
+          <span class="card-emoji">🎓</span>
           <h3>ولي الأمر والطلبة</h3>
           <p>متابعة الدروس بكود الطالب الخاص</p>
-          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;"><i class="fa-solid fa-arrow-left"></i> دخول كود الطالب</button>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">دخول كود الطالب ⬅️</button>
         </div>
       </div>
     </section>
@@ -151,21 +149,21 @@
     <section id="view-admin" class="glass-card" style="display: none;">
       <div class="dashboard-header">
         <div>
-          <h2><i class="fa-solid fa-user-shield" style="color: var(--primary);"></i> لوحة تحكم الأدمن (سحابية)</h2>
+          <h2>🛡️ لوحة تحكم الأدمن (سحابية)</h2>
           <p style="color: var(--text-muted);">تحديث فوري لبيانات المنصة عبر جميع الأجهزة</p>
         </div>
-        <button class="btn btn-danger" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> خروج</button>
+        <button class="btn btn-danger" onclick="logout()">🚪 خروج</button>
       </div>
 
       <div class="stats-grid">
-        <div class="stat-box"><i class="fa-solid fa-chalkboard-user" style="font-size: 2rem; color: var(--primary);"></i><div class="stat-info"><h4>إجمالي المدرسين</h4><span id="stat-teachers-count">0</span></div></div>
-        <div class="stat-box"><i class="fa-solid fa-bell" style="font-size: 2rem; color: var(--warning);"></i><div class="stat-info"><h4>طلبات قيد الموافقة</h4><span id="stat-pending-count">0</span></div></div>
-        <div class="stat-box"><i class="fa-solid fa-users" style="font-size: 2rem; color: var(--secondary);"></i><div class="stat-info"><h4>إجمالي الطلاب</h4><span id="stat-students-count">0</span></div></div>
+        <div class="stat-box"><span style="font-size: 2rem;">👨‍🏫</span><div class="stat-info"><h4>إجمالي المدرسين</h4><span id="stat-teachers-count">0</span></div></div>
+        <div class="stat-box"><span style="font-size: 2rem;">🔔</span><div class="stat-info"><h4>طلبات قيد الموافقة</h4><span id="stat-pending-count">0</span></div></div>
+        <div class="stat-box"><span style="font-size: 2rem;">👥</span><div class="stat-info"><h4>إجمالي الطلاب</h4><span id="stat-students-count">0</span></div></div>
       </div>
 
       <div class="tabs-nav">
-        <div class="tab-item active" onclick="switchTab('admin', 'teachers-tab', event)"><i class="fa-solid fa-chalkboard-user"></i> دليل المعلمين</div>
-        <div class="tab-item" onclick="switchTab('admin', 'pending-tab', event)"><i class="fa-solid fa-bell"></i> الطلبات المعلقة</div>
+        <div class="tab-item active" onclick="switchTab('admin', 'teachers-tab', event)">👨‍🏫 دليل المعلمين</div>
+        <div class="tab-item" onclick="switchTab('admin', 'pending-tab', event)">🔔 الطلبات المعلقة</div>
       </div>
 
       <div id="admin-teachers-tab" class="tab-content active">
@@ -191,25 +189,25 @@
     <section id="view-teacher" class="glass-card" style="display: none;">
       <div class="dashboard-header">
         <div>
-          <h2><i class="fa-solid fa-chalkboard-user" style="color: var(--primary);"></i> مرحبًا <span id="teacher-profile-name">الأستاذ</span></h2>
+          <h2>👨‍🏫 مرحبًا <span id="teacher-profile-name">الأستاذ</span></h2>
           <p style="color: var(--text-muted);" id="teacher-profile-details">التخصص - المحافظة</p>
         </div>
-        <button class="btn btn-danger" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> خروج</button>
+        <button class="btn btn-danger" onclick="logout()">🚪 خروج</button>
       </div>
 
       <div class="tabs-nav">
-        <div class="tab-item active" onclick="switchTab('teacher', 'students-tab', event)"><i class="fa-solid fa-users"></i> الطلاب والأكواد</div>
-        <div class="tab-item" onclick="switchTab('teacher', 'files-tab', event)"><i class="fa-solid fa-folder-open"></i> رفع الملفات والشروحات</div>
+        <div class="tab-item active" onclick="switchTab('teacher', 'students-tab', event)">👥 الطلاب والأكواد</div>
+        <div class="tab-item" onclick="switchTab('teacher', 'files-tab', event)">📂 رفع الملفات والشروحات</div>
       </div>
 
       <div id="teacher-students-tab" class="tab-content active">
         <div style="background: white; padding: 1.5rem; border-radius: 14px; margin-bottom: 1.5rem;">
-          <h4><i class="fa-solid fa-user-plus" style="color: var(--primary);"></i> إضافة طالب وتوليد كود أونلاين:</h4>
+          <h4>➕ إضافة طالب وتوليد كود أونلاين:</h4>
           <form onsubmit="handleAddStudent(event)" style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
             <input type="text" id="new-student-name" class="form-control" placeholder="اسم الطالب" required style="flex:2; min-width: 180px;">
             <input type="tel" id="new-student-phone" class="form-control" placeholder="هاتف ولي الأمر" required style="flex:1; min-width: 140px;">
             <input type="text" id="new-student-group" class="form-control" placeholder="المجموعة / الصف" required style="flex:1; min-width: 140px;">
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-key"></i> إضافة وإصدار كود</button>
+            <button type="submit" class="btn btn-primary">🔑 إضافة وإصدار كود</button>
           </form>
         </div>
 
@@ -223,7 +221,7 @@
 
       <div id="teacher-files-tab" class="tab-content">
         <div style="background: white; padding: 1.5rem; border-radius: 14px; margin-bottom: 1.5rem;">
-          <h4><i class="fa-solid fa-cloud-arrow-up" style="color: var(--primary);"></i> رفع درس أو فيديو أونلاين:</h4>
+          <h4>☁️ رفع درس أو فيديو أونلاين:</h4>
           <form onsubmit="handleUploadContent(event)" style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
             <input type="text" id="upload-title" class="form-control" placeholder="عنوان الدرس" required style="flex:2; min-width: 180px;">
             <select id="upload-type" class="form-control" style="flex:1; min-width: 130px;" required>
@@ -231,7 +229,7 @@
               <option value="ملف PDF">ملف PDF / مذكرة</option>
             </select>
             <input type="url" id="upload-url" class="form-control" placeholder="رابط الملف/الفيديو" required style="flex:2; min-width: 180px;">
-            <button type="submit" class="btn btn-success"><i class="fa-solid fa-upload"></i> نشر سحابي</button>
+            <button type="submit" class="btn btn-success">🚀 نشر سحابي</button>
           </form>
         </div>
 
@@ -243,14 +241,14 @@
     <section id="view-parent" class="glass-card" style="display: none;">
       <div class="dashboard-header">
         <div>
-          <h2><i class="fa-solid fa-graduation-cap" style="color: var(--primary);"></i> مرحبًا <span id="student-portal-name">الطالب</span></h2>
+          <h2>🎓 مرحبًا <span id="student-portal-name">الطالب</span></h2>
           <p style="color: var(--text-muted);">المدرس الخاص بك: <strong id="student-portal-teacher" style="color: var(--primary-dark);">--</strong></p>
         </div>
-        <button class="btn btn-danger" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> خروج</button>
+        <button class="btn btn-danger" onclick="logout()">🚪 خروج</button>
       </div>
 
       <div id="parent-materials-tab" class="tab-content active">
-        <h4 style="margin-bottom: 1rem;"><i class="fa-solid fa-book-open"></i> الشروحات والملفات المتاحة من المعلم:</h4>
+        <h4 style="margin-bottom: 1rem;">📚 الشروحات والملفات المتاحة من المعلم:</h4>
         <div class="files-grid" id="parent-files-grid"></div>
       </div>
     </section>
@@ -261,7 +259,7 @@
     <div class="modal-box">
       <!-- Admin Login -->
       <div id="form-login-admin" class="auth-subform" style="display: none;">
-        <h3 style="margin-bottom: 1rem; text-align: center;"><i class="fa-solid fa-lock"></i> دخول الأدمن</h3>
+        <h3 style="margin-bottom: 1rem; text-align: center;">🔐 دخول الأدمن</h3>
         <form onsubmit="handleAdminLogin(event)">
           <div class="form-group"><label>المستخدم</label><input type="text" id="admin-user" class="form-control" value="admin" required></div>
           <div class="form-group"><label>كلمة المرور</label><input type="password" id="admin-pass" class="form-control" value="123456" required></div>
@@ -271,7 +269,7 @@
 
       <!-- Teacher Login -->
       <div id="form-login-teacher" class="auth-subform" style="display: none;">
-        <h3 style="margin-bottom: 1rem; text-align: center;"><i class="fa-solid fa-chalkboard-user"></i> دخول المعلم</h3>
+        <h3 style="margin-bottom: 1rem; text-align: center;">👨‍🏫 دخول المعلم</h3>
         <form onsubmit="handleTeacherLogin(event)">
           <div class="form-group"><label>الهاتف أو البريد</label><input type="text" id="t-login-id" class="form-control" required></div>
           <div class="form-group"><label>كلمة السر</label><input type="password" id="t-login-pass" class="form-control" required></div>
@@ -284,7 +282,7 @@
 
       <!-- Teacher Register -->
       <div id="form-register-teacher" class="auth-subform" style="display: none;">
-        <h3 style="margin-bottom: 1rem; text-align: center;"><i class="fa-solid fa-user-plus"></i> تسجيل مدرس جديد</h3>
+        <h3 style="margin-bottom: 1rem; text-align: center;">➕ تسجيل مدرس جديد</h3>
         <form onsubmit="handleTeacherRegister(event)">
           <div class="form-group"><label>الاسم الكامل</label><input type="text" id="reg-t-name" class="form-control" required></div>
           <div class="form-row">
@@ -303,10 +301,54 @@
 
       <!-- Parent Login -->
       <div id="form-login-parent" class="auth-subform" style="display: none;">
-        <h3 style="margin-bottom: 1rem; text-align: center;"><i class="fa-solid fa-key"></i> دخول ولي الأمر / الطالب</h3>
+        <h3 style="margin-bottom: 1rem; text-align: center;">🔑 دخول ولي الأمر / الطالب</h3>
         <form onsubmit="handleParentLogin(event)">
           <div class="form-group">
             <label>كود الطالب الخاص</label>
             <input type="text" id="parent-student-code" class="form-control" placeholder="STU-1001" required style="text-align: center; font-weight: 800; font-size: 1.2rem;">
           </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%;">استعراض الد
+          <button type="submit" class="btn btn-primary" style="width: 100%;">استعراض الدروس أونلاين</button>
+        </form>
+      </div>
+
+      <button onclick="closeModal()" class="btn btn-danger" style="width: 100%; margin-top: 1rem;">إغلاق</button>
+    </div>
+  </div>
+
+  <footer><p>منصة المجتهد التعليمية السحابية &copy; 2026 - جميع الحقوق محفوظة</p></footer>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDIigMruwB9agz8mRK6e2sa53n9VpCJcdw",
+      authDomain: "manasa2026.firebaseapp.com",
+      projectId: "manasa2026",
+      storageBucket: "manasa2026.firebasestorage.app",
+      messagingSenderId: "110485096204",
+      appId: "1:110485096204:web:13ffa365b6de66db452b29",
+      measurementId: "G-RLTM72YYM0",
+      databaseURL: "https://manasa2026-default-rtdb.firebaseio.com/"
+    };
+    
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    const dbRef = firebase.database().ref('ELMOGTAHED_CLOUD_DB');
+
+    let cloudData = {
+      teachers: {},
+      pendingTeachers: {},
+      students: {},
+      materials: {}
+    };
+
+    dbRef.on('value', (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        cloudData = {
+          teachers: data.teachers || {},
+          pendingTeachers: data.pendingTeachers || {},
+          students: data.students || {},
+          materials: data.materials || {}
+        };
+        if (currentUser && currentUser.role === 'admin') renderAdminDashboard();
+     
